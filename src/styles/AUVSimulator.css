@@ -1,0 +1,33 @@
+/* AUVSimulator.css */
+.auv-simulator-panel {
+  background: #181c24;
+  color: #e0e6ef;
+  padding: 2rem;
+  width: 100%;
+  border-radius: 12px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.auv-simulator-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.auv-simulator-panel {
+  flex: 1 1 300px;
+  min-width: 300px;
+}
+
+.auv-map-panel {
+  flex: 1 1 400px;
+  min-width: 350px;
+  max-width: 600px;
+}
+.auv-features {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}

@@ -1,0 +1,10 @@
+/* AlertSystem.css */
+.alert-system {
+  background: #2a3145;
+  color: #ffecb3;
+  border-left: 4px solid #ff9800;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
