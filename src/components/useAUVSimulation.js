@@ -3,25 +3,48 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+const generateRandomDirection = () => {
+  const angle = Math.random() * 2 * Math.PI;
+  return { x: Math.cos(angle), y: Math.sin(angle) };
+}
+
 const INITIAL_AUVS = [
   {
     id: 1,
     name: 'AUV-Alpha',
     battery: 1.0, // 100%
     latitude: 37.7749,
-    longitude: -122.4194
+    longitude: -122.4194,
+    state: 'normal', // can be 'normal', 'warning', 'critical'
+    mission_type: 'Sampling', // can be 'Sampling', 'Surveying', 'Idle' or 'Tracking'
+    direction: generateRandomDirection() // Random initial direction
   },
   {
     id: 2,
     name: 'AUV-Beta',
     battery: 1.0,
     latitude: 37.7750,
-    longitude: -122.4180
+    longitude: -122.4180,
+    state: 'normal',
+    mission_type: 'Surveying',
+    direction: generateRandomDirection()
   },
+  //   {
+  //   id: 2,
+  //   name: 'AUV-Charlie',
+  //   battery: 1.0,
+  //   latitude: 37.7750,
+  //   longitude: -122.4180,
+  //   state: 'normal',
+  //   mission_type: 'Surveying',
+  //   direction: generateRandomDirection()
+  // },
 ];
 
-const BATTERY_DRAIN_PER_TICK = 0.01; // 1% every tick (5s)
 
+
+const BATTERY_DRAIN_PER_TICK = 0.01; // 1% every tick (5s)
+const SPEED = 0.0001; // 0.0001 degrees per tick (5s)
 const useAUVSimulation = () => {
   const [auvs, setAuvs] = useState(INITIAL_AUVS);
   const [alerts, setAlerts] = useState([]);
@@ -44,6 +67,7 @@ const useAUVSimulation = () => {
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
+      console.log('AUVs updated at', new Date().toLocaleTimeString());
       setAuvs(prevAuvs => {
         return prevAuvs.map(auv => {
           const newBattery = Math.max(0, auv.battery - BATTERY_DRAIN_PER_TICK * (Math.random() + 0.5)); // Randomize battery drain slightly
@@ -57,11 +81,16 @@ const useAUVSimulation = () => {
               auvTag: auv.name,
             });
           }
+          var directionIncrement = {
+            x: auv.direction.x * Math.random() * SPEED,
+            y: auv.direction.y * Math.random() * SPEED
+          }
           return {
             ...auv,
+            state: newBattery < 0.2 ? 'critical' : newBattery < 0.5 ? 'warning' : 'normal',
             battery: newBattery,
-            longitude: Number((auv.longitude + (Math.random() - 0.5) * 0.001).toFixed(6)),
-            latitude: Number((auv.latitude + (Math.random() - 0.5) * 0.001).toFixed(6)),
+            longitude: newBattery > 0 ? Number((auv.longitude + directionIncrement.x).toFixed(6)) : auv.longitude,
+            latitude: newBattery > 0 ? Number((auv.latitude + directionIncrement.y).toFixed(6)) : auv.latitude,
           };
         });
       });
