@@ -1,12 +1,49 @@
-# React + Vite
+# AUV Telemetry Dashboard Challenge
+![demo](.uploads/demo.mp4)
+# Quick Start Guide
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Prerequisites
+- Node 22 or higher
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/tritonminingco/AUV-Luna.git
 
-## Expanding the ESLint configuration
+2. `cd` into the project directory:
+   ```bash
+   cd AUV-Luna
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. Install the dependencies:
+   ```bash
+    npm install
+    ```
+
+## Running the Application
+
+To start the application, run:
+   ```bash
+   npm start dev
+   ```
+It will start the development server and open the application in your default web browser at `http://localhost:5173`.
+
+# Architecture Overview
+
+## Mock Engine
+
+- `useAUVSimulation` is the mock engine which simulates the AUV telemetry data. It generates random telemetry data for the AUV, including position, battery level, status etc...
+
+## Components
+
+- `AUVSimulator` is the main dashboard component that displays the telemetry data.
+- `AUVCard` is the component that displays individual telemetry points, one for each AUV.
+- `AUVMap` is the component that displays the AUV's position on a map.
+- `AUVDevButton` is a quick access button to trigger a sample Alert Dialog.
+- `alerts/*.jsx` contains the Alert Dialog components including the System and the reusable Alert Dialog.
+
+
+
+
+
