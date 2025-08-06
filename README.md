@@ -1,5 +1,7 @@
 # AUV Telemetry Dashboard Challenge
-![demo](.uploads/demo.mp4)
+
+https://github.com/user-attachments/assets/73440bbc-73a4-4d1b-bd3c-701119653955
+
 # Quick Start Guide
 
 ## Prerequisites
